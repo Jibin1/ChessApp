@@ -1,0 +1,8 @@
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessApp.exe.config
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessApp.exe
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessApp.pdb
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.csprojResolveAssemblyReference.cache
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.exe
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.pdb
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessBoardModel.dll
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessBoardModel.pdb
