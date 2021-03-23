@@ -6,3 +6,5 @@ C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.exe
 C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.pdb
 C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessBoardModel.dll
 C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\bin\Debug\ChessBoardModel.pdb
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.ChessBoardForm.resources
+C:\Users\Jibin\Desktop\Jibin\ChessApp\ChessApp\obj\Debug\ChessApp.csproj.GenerateResource.Cache

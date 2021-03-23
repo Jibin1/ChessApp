@@ -8,7 +8,7 @@ namespace ChessBoardModel
 {
     public class Cell
     {
-
+        
         public int RowNumber { get; set; }
         public int ColumnNumber { get; set; }
         public bool CurrentlyOccupied { get; set; }
@@ -36,6 +36,12 @@ namespace ChessBoardModel
         {
             chessPiece = null;
             CurrentlyOccupied = false;
+        }
+
+        public override bool Equals(object obj)
+        {
+
+            return (this.RowNumber == ((Cell)obj).RowNumber) && (this.ColumnNumber == ((Cell)obj).ColumnNumber);
         }
     }
 }
