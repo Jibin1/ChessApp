@@ -14,6 +14,7 @@ namespace ChessBoardModel
         public bool CurrentlyOccupied { get; set; }
         public bool LegalNextMove { get; set; }
         public Piece chessPiece { get; set; }
+        public string CellName { get; set; }
 
 
         public Cell(int x, int y)
@@ -43,5 +44,7 @@ namespace ChessBoardModel
 
             return (this.RowNumber == ((Cell)obj).RowNumber) && (this.ColumnNumber == ((Cell)obj).ColumnNumber);
         }
+
+        
     }
 }

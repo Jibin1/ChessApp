@@ -12,13 +12,24 @@ namespace ChessApp
         static void Main(string[] args)
         {
             Board chessBoard = new Board(8);
-
-            chessBoard.Grid[4, 4].loadPiece("King", "White");
-            chessBoard.Grid[5, 4].loadPiece("Pawn", "White");
-            Cell temp = chessBoard.Grid[4, 4];
-            chessBoard.legalMove(temp);
-            Console.Write(chessBoard.printLegalMoves());
-            //Console.Write(chessBoard);
+            Console.WriteLine(chessBoard);
+            bool exit = false;
+            while(exit == false)
+            {
+                Console.WriteLine("Enter first cell");
+                string fromCell = Console.ReadLine();
+                Console.WriteLine("Enter secnd cell");
+                string toCell = Console.ReadLine();
+                if(fromCell == "end" || toCell == "end")
+                {
+                    exit = true;
+                }else
+                {
+                    chessBoard.movePiece(fromCell, toCell);
+                }
+            }
+            
+           
 
         }
     }
