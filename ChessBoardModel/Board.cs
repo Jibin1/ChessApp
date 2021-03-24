@@ -126,54 +126,190 @@ namespace ChessBoardModel
 
         //}
 
+
         public void legalMove(Cell currentCell)
         {
             
             Piece piece = currentCell.chessPiece;
             int row = currentCell.RowNumber;
             int col = currentCell.ColumnNumber;
+            int xtemp = row;
+            int ytemp = col;
+
             switch (piece.Name)
             {
                 case "Pawn":
+                    ///////////////////////////////////////////////////////////////////////////////
+                    //Black Pawns can move down one or diagonally one space to attack white pieces.
+                    ///////////////////////////////////////////////////////////////////////////////
                     if (piece.Color == "Black")
                     {
-                        Grid[currentCell.RowNumber + 1, currentCell.ColumnNumber].LegalNextMove = true;
+                        if(row < Size-1)
+                        {
+                            if(Grid[row+1, col].CurrentlyOccupied == false)
+                            {
+                                Grid[row + 1, col].LegalNextMove = true;
+                            }
+
+                            if(col - 1 >= 0 && Grid[row+1, col-1].CurrentlyOccupied == true && Grid[row+1,col-1].chessPiece.Color == "White")
+                            {
+                                Grid[row + 1, col - 1].LegalNextMove = true;
+                            }
+                            
+                            if(col + 1 < Size && Grid[row+1,col+1].CurrentlyOccupied == true &&Grid[row + 1, col + 1].chessPiece.Color == "White")
+                            {
+                                Grid[row + 1, col + 1].LegalNextMove = true;
+                            }
+                            
+
+                        }                        
                     }
+                    /////////////////////////////////////////////////////////////////////////////
+                    //White Pawns can move up one or diagonally one space to attack white pieces.
+                    /////////////////////////////////////////////////////////////////////////////
                     else
                     {
-                        Grid[currentCell.RowNumber + 1, currentCell.ColumnNumber].LegalNextMove = true;
+                        if (row > 0)
+                        {
+                            if (Grid[row- 1, col].CurrentlyOccupied == false)
+                            {
+                                Grid[row - 1, col].LegalNextMove = true;
+                            }
+
+                            if (col - 1 >= 0 && Grid[row - 1, col - 1].CurrentlyOccupied == true && Grid[row - 1, col - 1].chessPiece.Color == "Black")
+                            {
+                                Grid[row - 1, col - 1].LegalNextMove = true;
+                            }
+
+                            if (col + 1 < Size && Grid[row - 1, col + 1].CurrentlyOccupied == true && Grid[row - 1, col + 1].chessPiece.Color == "Black")
+                            {
+                                Grid[row - 1, col + 1].LegalNextMove = true;
+                            }
+
+
+                        }
                     }
                     break;
+
+                //////////////////////////////////////////////////////////////
+                //Rook can move vertically or horizontally one or more spaces.
+                //////////////////////////////////////////////////////////////
                 case "Rook":
-                    for (int i = 0; i < Size; i++)
+
+                    //up
+                    xtemp = row - 1;
+                    bool exit = false;
+
+                    while(exit == false && xtemp >= 0)
                     {
-                        if (i == col)
+                        if(Grid[xtemp, col].CurrentlyOccupied == true)
                         {
-
+                            exit = true;
+                            if(Grid[xtemp, col].chessPiece.Color != piece.Color)
+                            {
+                                Grid[xtemp, col].LegalNextMove = true;
+                            }
                         }
                         else
                         {
-                            Grid[row, i].LegalNextMove = true;
+                            Grid[xtemp, col].LegalNextMove = true;
                         }
+                        xtemp--;
+                        
+                    }
 
-                        if (i == row)
+                    //down
+                    xtemp = row + 1;
+                    exit = false;
+
+                    while (exit == false && xtemp < Size)
+                    {
+                        if (Grid[xtemp, col].CurrentlyOccupied == true)
                         {
-
+                            exit = true;
+                            if (Grid[xtemp, col].chessPiece.Color != piece.Color)
+                            {
+                                Grid[xtemp, col].LegalNextMove = true;
+                            }
                         }
                         else
                         {
-                            Grid[i, col].LegalNextMove = true;
+                            Grid[xtemp, col].LegalNextMove = true;
                         }
+                        xtemp--;
+
+                    }
+
+                    //left
+                    ytemp = col - 1;
+                    exit = false;
+
+                    while (exit == false && ytemp >= 0)
+                    {
+                        if (Grid[row, ytemp].CurrentlyOccupied == true)
+                        {
+                            exit = true;
+                            if (Grid[row, ytemp].chessPiece.Color != piece.Color)
+                            {
+                                Grid[row, ytemp].LegalNextMove = true;
+                            }
+                        }
+                        else
+                        {
+                            Grid[row, ytemp].LegalNextMove = true;
+                        }
+                        ytemp--;
+
+                    }
+
+                    //right
+                    ytemp = col + 1;
+                    exit = false;
+
+                    while (exit == false && ytemp < Size)
+                    {
+                        if (Grid[row, ytemp].CurrentlyOccupied == true)
+                        {
+                            exit = true;
+                            if (Grid[row, ytemp].chessPiece.Color != piece.Color)
+                            {
+                                Grid[row, ytemp].LegalNextMove = true;
+                            }
+                        }
+                        else
+                        {
+                            Grid[row, ytemp].LegalNextMove = true;
+                        }
+                        ytemp++;
 
                     }
                     break;
+
+                ///////////////////////////////////////////////////////////////
+                //Bishop can move diagonally in any direction 1 or more spaces.
+                ///////////////////////////////////////////////////////////////
                 case "Bishop":
+
                     //upper left
-                    int xtemp = row - 1;
-                    int ytemp = col - 1;
-                    while (xtemp >= 0 && ytemp >= 0)
+                    xtemp = row - 1;
+                    ytemp = col - 1;
+                    exit = false;
+                    while (xtemp >= 0 && ytemp >= 0 && exit == false)
                     {
-                        Grid[xtemp, ytemp].LegalNextMove = true;
+                        if(Grid[xtemp, ytemp].CurrentlyOccupied == true)
+                        {
+                            exit = true;
+                            if (Grid[xtemp, ytemp].chessPiece.Color != piece.Color)
+                            {
+                                Grid[xtemp, ytemp].LegalNextMove = true;
+                            }
+
+                        }
+                        else
+                        {
+                            Grid[xtemp, ytemp].LegalNextMove = true;
+                        }
+                        
                         xtemp--;
                         ytemp--;
                     }
@@ -181,9 +317,22 @@ namespace ChessBoardModel
                     //upper right
                     xtemp = row - 1;
                     ytemp = col + 1;
-                    while (xtemp >= 0 && ytemp < Size)
+                    exit = false;
+                    while (xtemp >= 0 && ytemp < Size && exit == false)
                     {
-                        Grid[xtemp, ytemp].LegalNextMove = true;
+                        if(Grid[xtemp,ytemp].CurrentlyOccupied == true)
+                        {
+                            exit = true;
+                            if (Grid[xtemp, ytemp].chessPiece.Color != piece.Color)
+                            {
+                                Grid[xtemp, ytemp].LegalNextMove = true;
+                            }
+                        }
+                        else
+                        {
+                            Grid[xtemp, ytemp].LegalNextMove = true;
+                        }
+                        
                         xtemp--;
                         ytemp++;
                     }
@@ -191,9 +340,21 @@ namespace ChessBoardModel
                     //lower left
                     xtemp = row + 1;
                     ytemp = col - 1;
-                    while (xtemp < Size && ytemp >= 0)
+                    exit = false;
+                    while (xtemp < Size && ytemp >= 0 && exit == false)
                     {
-                        Grid[xtemp, ytemp].LegalNextMove = true;
+                        if (Grid[xtemp, ytemp].CurrentlyOccupied == true)
+                        {
+                            exit = true;
+                            if (Grid[xtemp, ytemp].chessPiece.Color != piece.Color)
+                            {
+                                Grid[xtemp, ytemp].LegalNextMove = true;
+                            }
+                        }
+                        else
+                        {
+                            Grid[xtemp, ytemp].LegalNextMove = true;
+                        }
                         xtemp++;
                         ytemp--;
                     }
@@ -201,13 +362,29 @@ namespace ChessBoardModel
                     //lower right
                     xtemp = row + 1;
                     ytemp = col + 1;
-                    while (xtemp < Size && ytemp < Size)
+                    exit = false;
+                    while (xtemp < Size && ytemp < Size && exit == false)
                     {
-                        Grid[xtemp, ytemp].LegalNextMove = true;
+                        if (Grid[xtemp, ytemp].CurrentlyOccupied == true)
+                        {
+                            exit = true;
+                            if (Grid[xtemp, ytemp].chessPiece.Color != piece.Color)
+                            {
+                                Grid[xtemp, ytemp].LegalNextMove = true;
+                            }
+                        }
+                        else
+                        {
+                            Grid[xtemp, ytemp].LegalNextMove = true;
+                        }
                         xtemp++;
                         ytemp++;
                     }
                     break;
+
+                //////////////////////////////////////////////////////////////////////////////////////////
+                //Knight can move two spaces tur 90 degrees and move one space in any direction. (L-Shape)
+                //////////////////////////////////////////////////////////////////////////////////////////
                 case "Knight":
                     xtemp = row;
                     ytemp = col;
@@ -215,46 +392,82 @@ namespace ChessBoardModel
                     //upper left
                     if (xtemp - 2 >= 0 && ytemp - 1 >= 0)
                     {
-                        Grid[xtemp - 2, ytemp - 1].LegalNextMove = true;
+
+                        if(Grid[xtemp - 2, ytemp - 1].CurrentlyOccupied == false || (Grid[xtemp - 2, ytemp -1].CurrentlyOccupied == true && Grid[xtemp - 2, ytemp - 1].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp - 2, ytemp - 1].LegalNextMove = true;
+                        }
+                        
                     }
                     if (xtemp - 1 >= 0 && ytemp - 2 >= 0)
                     {
-                        Grid[xtemp - 1, ytemp - 2].LegalNextMove = true;
+                        if (Grid[xtemp - 1, ytemp - 2].CurrentlyOccupied == false || (Grid[xtemp - 1, ytemp - 2].CurrentlyOccupied == true && Grid[xtemp - 1, ytemp - 2].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp - 1, ytemp - 2].LegalNextMove = true;
+                        }
+                        
                     }
 
 
                     //upper right
                     if (xtemp - 2 >= 0 && ytemp + 1 < Size)
                     {
-                        Grid[xtemp - 2, ytemp + 1].LegalNextMove = true;
+                        if (Grid[xtemp - 2, ytemp + 1].CurrentlyOccupied == false || (Grid[xtemp - 2, ytemp + 1].CurrentlyOccupied == true && Grid[xtemp - 2, ytemp + 1].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp - 2, ytemp + 1].LegalNextMove = true;
+                        }
+                        
                     }
 
                     if (xtemp - 1 >= 0 && ytemp + 2 < Size)
                     {
-                        Grid[xtemp - 1, ytemp + 2].LegalNextMove = true;
+                        if (Grid[xtemp - 1, ytemp + 2].CurrentlyOccupied == false || (Grid[xtemp - 1, ytemp + 2].CurrentlyOccupied == true && Grid[xtemp - 1, ytemp + 2].chessPiece.Color != piece.Color))
+                        {
+                           Grid[xtemp - 1, ytemp + 2].LegalNextMove = true;
+                        }
+
+                        
                     }
 
                     //lower left
                     if (xtemp +  2 < Size && ytemp - 1 >= 0)
                     {
-                        Grid[xtemp + 2, ytemp - 1].LegalNextMove = true;
+                        if (Grid[xtemp + 2, ytemp - 1].CurrentlyOccupied == false || (Grid[xtemp + 2, ytemp - 1].CurrentlyOccupied == true && Grid[xtemp + 2, ytemp - 1].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp + 2, ytemp - 1].LegalNextMove = true;
+                        }
+                        
                     }
                     if (xtemp + 1 < Size && ytemp - 2 >= 0)
                     {
-                        Grid[xtemp + 1, ytemp - 2].LegalNextMove = true;
+                        if (Grid[xtemp + 1, ytemp - 2].CurrentlyOccupied == false || (Grid[xtemp + 1, ytemp - 2].CurrentlyOccupied == true && Grid[xtemp + 1, ytemp - 2].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp + 1, ytemp - 2].LegalNextMove = true;
+                        }
+                        
                     }
 
                     //lower right
                     if (xtemp + 2 < Size && ytemp + 1 < Size)
                     {
-                        Grid[xtemp + 2, ytemp + 1].LegalNextMove = true;
+                        if (Grid[xtemp + 2, ytemp + 1].CurrentlyOccupied == false || (Grid[xtemp + 2, ytemp + 1].CurrentlyOccupied == true && Grid[xtemp + 2, ytemp + 1].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp + 2, ytemp + 1].LegalNextMove = true;
+                        }
                     }
                     if (xtemp + 1 < Size && ytemp + 2 < Size)
                     {
-                        Grid[xtemp + 1, ytemp + 2].LegalNextMove = true;
+                        if (Grid[xtemp + 1, ytemp + 2].CurrentlyOccupied == false || (Grid[xtemp + 1, ytemp + 2].CurrentlyOccupied == true && Grid[xtemp + 1, ytemp + 2].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp + 1, ytemp + 2].LegalNextMove = true;
+                        }
                     }
 
                     break;
+
+                ////////////////////////////////////////////////////////////////////////////////////////
+
+                ///////////////////////////////////////////////////////////////////////////////////////
                 case "Queen":
                     Cell temp = currentCell;
                     temp.chessPiece.Name = "Rook";
@@ -263,6 +476,10 @@ namespace ChessBoardModel
                     legalMove(temp);
 
                     break;
+                
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //King can move one space in any direction.////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////////////////////
                 case "King":
                     xtemp = row;
                     ytemp = col;
@@ -272,27 +489,46 @@ namespace ChessBoardModel
                     //upper right
                     if(xtemp - 1 >= 0)
                     {
-                        Grid[xtemp - 1, ytemp].LegalNextMove = true;
+                        if(Grid[xtemp - 1, ytemp].CurrentlyOccupied == false ||(Grid[xtemp-1,ytemp].CurrentlyOccupied == true && Grid[xtemp-1,ytemp].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp - 1, ytemp].LegalNextMove = true;
+                        }
+                        
                         if(ytemp - 1 >= 0)
                         {
-                            Grid[xtemp - 1, ytemp - 1].LegalNextMove = true;
+                            if (Grid[xtemp - 1, ytemp-1].CurrentlyOccupied == false || (Grid[xtemp - 1, ytemp-1].CurrentlyOccupied == true && Grid[xtemp - 1, ytemp-1].chessPiece.Color != piece.Color))
+                            {
+                                Grid[xtemp - 1, ytemp - 1].LegalNextMove = true;
+                            }
+                            
                         }
                         if(ytemp + 1 < Size)
                         {
-                            Grid[xtemp - 1, ytemp + 1].LegalNextMove = true;
+                            if (Grid[xtemp - 1, ytemp + 1].CurrentlyOccupied == false || (Grid[xtemp - 1, ytemp + 1].CurrentlyOccupied == true && Grid[xtemp - 1, ytemp + 1].chessPiece.Color != piece.Color))
+                            {
+                                Grid[xtemp - 1, ytemp + 1].LegalNextMove = true;
+                            }
+                            
                         }
                     }
 
                     //left
                     if(ytemp - 1 >= 0)
                     {
-                        Grid[xtemp, ytemp - 1].LegalNextMove = true;
+                        if (Grid[xtemp, ytemp-1].CurrentlyOccupied == false || (Grid[xtemp, ytemp-1].CurrentlyOccupied == true && Grid[xtemp, ytemp-1].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp, ytemp - 1].LegalNextMove = true;
+                        }
+                       
                     }
 
                     //right
                     if(ytemp + 1 < Size)
                     {
-                        Grid[xtemp, ytemp + 1].LegalNextMove = true;
+                        if (Grid[xtemp, ytemp + 1].CurrentlyOccupied == false || (Grid[xtemp, ytemp + 1].CurrentlyOccupied == true && Grid[xtemp, ytemp + 1].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp, ytemp + 1].LegalNextMove = true;
+                        }
                     }
 
                     //down
@@ -300,14 +536,23 @@ namespace ChessBoardModel
                     //lower right
                     if(xtemp + 1 < Size)
                     {
-                        Grid[xtemp + 1, ytemp].LegalNextMove = true;
+                        if (Grid[xtemp + 1, ytemp].CurrentlyOccupied == false || (Grid[xtemp + 1, ytemp].CurrentlyOccupied == true && Grid[xtemp + 1, ytemp].chessPiece.Color != piece.Color))
+                        {
+                            Grid[xtemp + 1, ytemp].LegalNextMove = true;
+                        }
                         if(ytemp - 1 >= 0)
                         {
-                            Grid[xtemp + 1, ytemp - 1].LegalNextMove = true;
+                            if (Grid[xtemp + 1, ytemp - 1].CurrentlyOccupied == false || (Grid[xtemp + 1, ytemp - 1].CurrentlyOccupied == true && Grid[xtemp + 1, ytemp - 1].chessPiece.Color != piece.Color))
+                            {
+                                Grid[xtemp + 1, ytemp - 1].LegalNextMove = true;
+                            }
                         }
                         if(ytemp + 1 < Size)
                         {
-                            Grid[xtemp + 1, ytemp + 1].LegalNextMove = true;
+                            if (Grid[xtemp + 1, ytemp + 1].CurrentlyOccupied == false || (Grid[xtemp + 1, ytemp + 1].CurrentlyOccupied == true && Grid[xtemp + 1, ytemp + 1].chessPiece.Color != piece.Color))
+                            {
+                                Grid[xtemp + 1, ytemp + 1].LegalNextMove = true;
+                            }
                         }
                     }
 
@@ -344,15 +589,16 @@ namespace ChessBoardModel
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < Size; i++)
             {
-                sb.Append("| ");
                 for(int j = 0; j < Size; j++)
                 {
                     if (Grid[i, j].CurrentlyOccupied == true)
                     {
-                        sb.Append(Grid[i, j].chessPiece.Name + " | ");
+                        string name = Grid[i, j].chessPiece.Name.Substring(0,4);
+                        
+                        sb.Append("|" + name + "|");
                     }else
                     {
-                        sb.Append("- |");
+                        sb.Append("|    |");
                     }
                 }
                 sb.Append("\n");
