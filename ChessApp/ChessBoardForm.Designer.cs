@@ -28,19 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(600, 600);
+            this.panel1.TabIndex = 0;
             // 
             // ChessBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 400);
+            this.ClientSize = new System.Drawing.Size(741, 636);
+            this.Controls.Add(this.panel1);
             this.Name = "ChessBoardForm";
-            this.Text = "ChessBoardForm";
+            this.Text = " ";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panel1;
     }
 }
