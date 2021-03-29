@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using ChessBoardModel;
 
 namespace ChessApp
 {
@@ -12,13 +13,20 @@ namespace ChessApp
     {
         public int row { get; set; }
         public int col { get; set; }
-        //private Color textColor;
-        //private Color backColor; 
+        //public Cell cell { get; set; }
+        
+        public Color tileColor { get; set; } 
 
         public ChessButton(int row, int col)
         {
             this.row = row;
             this.col = col;
+            //cell = null;
+        }
+        
+        public ChessButton()
+        {
+
         }
 
         

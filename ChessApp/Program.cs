@@ -15,6 +15,13 @@ namespace ChessApp
         static void Main(string[] args)
         {
             //Board chessBoard = new Board(8);
+            //chessBoard.movePiece("d2", "d3");
+            //chessBoard.movePiece("c1", "e3");
+            //List<Tuple<int, int>> temp = chessBoard.legalList;
+            //foreach(var s in temp)
+            //{
+            //    Console.WriteLine(s.Item1 + ", " + s.Item2);
+            //}
             //Console.WriteLine(chessBoard);
             //bool exit = false;
             //while(exit == false)
