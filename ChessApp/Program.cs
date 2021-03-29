@@ -39,8 +39,8 @@ namespace ChessApp
             //    }
             //}
 
-            Application.Run(new ChessBoardForm());
-
+            //Application.Run(new ChessBoardForm());
+            Console.Write(0 % 2);
 
         }
     }

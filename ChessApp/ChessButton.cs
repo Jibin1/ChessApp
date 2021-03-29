@@ -13,7 +13,7 @@ namespace ChessApp
     {
         public int row { get; set; }
         public int col { get; set; }
-        //public Cell cell { get; set; }
+
         
         public Color tileColor { get; set; } 
 
@@ -21,7 +21,7 @@ namespace ChessApp
         {
             this.row = row;
             this.col = col;
-            //cell = null;
+            
         }
         
         public ChessButton()
